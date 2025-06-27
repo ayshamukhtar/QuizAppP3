@@ -1,6 +1,10 @@
 # QuizAppP3
 >Our Quiz App includes Features like:
 
+- User signs up by creating a user name and password 
+
+- When user logs in to their account it displays their score history.
+  
 - User can pick how many questions you want
   
 - User can choose which category of questions they want
