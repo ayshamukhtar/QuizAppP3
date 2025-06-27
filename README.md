@@ -1,6 +1,10 @@
 # QuizAppP3
 >Our Quiz App includes Features like:
 
+- User can pick how many questions you want
+  
+- User can choose which category of questions they want
+  
 - Light/Dark Mode
 
 - Timer for each question
