@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NYC Quiz - Results</title>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- CSS link -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="questions-page d-flex flex-column justify-content-center align-items-center text-center">
+
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" role="switch" id="toggleButton">
+      <label class="form-check-label" for="toggleButton" id="toggleButtonLabel">Light Mode</label>
+
+  </div>
+<div class="questions-page d-flex flex-column justify-content-center align-items-center text-center">
+
+  <h1 class="mb-3">Game Over!</h1>
+  <p class="lead">You scored:</p>
+  <h2 id="final-score" class="text-warning mb-4">0</h2>
+
+  <div>
+    <button class="btn btn-warning me-2" onclick="tryAgain()">Try Again</button>
+    <button class="btn btn-warning" onclick="viewLeaderboard()">Leaderboard Results</button>
+  </div>
+
+  <script>
+    // Load score 
+    const score = localStorage.getItem('score') || 0;
+    document.getElementById('final-score').textContent = score;
+
+    function tryAgain() {
+      window.location.href = "index.html";
+    }
+
+    function viewLeaderboard() {
+      window.location.href = "leaderboard.html";
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("toggleButton");
+  const label = document.getElementById("toggleButtonLabel");
+
+  const savedMode = localStorage.getItem("mode");
+  if (savedMode === "dark") {
+    document.body.classList.add("dark-mode");
+    toggle.checked = true;
+    label.textContent = "Light Mode";
+  } else {
+    label.textContent = "Dark Mode";
+  }
+
+  toggle.addEventListener("change", () => {
+    const isDark = toggle.checked;
+    document.body.classList.toggle("dark-mode", isDark);
+    localStorage.setItem("mode", isDark ? "dark" : "light");
+    label.textContent = isDark ? "Light Mode" : "Dark Mode";
+  });
+});
+
+  </script>
+
+</body>
+</html>
+

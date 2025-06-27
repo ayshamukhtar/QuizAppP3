@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leaderboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="profile.html">Profile</a>
+  </div>
+
+  <div class="content">
+    <h2>Save Your Score</h2>
+    <input type="text" id="inputUsername" placeholder="Enter username" />
+    <input type="number" id="inputScore" placeholder="Enter score" />
+    <button id="saveScoreBtn">Save</button>
+    <p id="saveMsg"></p>
+
+    <h2>Leaderboard</h2>
+    <button id="top5Btn">Show Top 5</button>
+    <ul id="leaderboardList"></ul>
+    <p id="userRank"></p>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const userId = localStorage.getItem("userId");
+      const username = localStorage.getItem("username");
+
+      const saveBtn = document.getElementById("saveScoreBtn");
+      const inputUsername = document.getElementById("inputUsername");
+      const inputScore = document.getElementById("inputScore");
+      const saveMsg = document.getElementById("saveMsg");
+
+      saveBtn.addEventListener("click", async () => {
+        const uname = inputUsername.value.trim();
+        const score = parseInt(inputScore.value.trim());
+
+        if (!uname || isNaN(score)) {
+          saveMsg.textContent = "Please enter a valid username and score.";
+          return;
+        }
+
+        // Get user ID from username
+        const resId = await fetch(`/users/id/${uname}`);
+        if (!resId.ok) {
+          saveMsg.textContent = "User not found.";
+          return;
+        }
+        const { id: uid } = await resId.json();
+
+        // Save score
+        const resSave = await fetch('/api/scores', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ user_id: uid, score })
+        });
+
+        if (resSave.ok) {
+          saveMsg.textContent = "Score saved successfully!";
+          inputScore.value = "";
+          fetchLeaderboard(currentLimit); // refresh leaderboard
+        } else {
+          saveMsg.textContent = "Failed to save score.";
+        }
+      });
+
+      let currentLimit = 10;
+
+      async function fetchLeaderboard(limit = 10) {
+        currentLimit = limit;
+        const res = await fetch(`/api/leaderboard?limit=${limit}`);
+        const data = await res.json();
+
+        const list = document.getElementById("leaderboardList");
+        list.innerHTML = "";
+        data.leaderboard.forEach((entry, index) => {
+          const li = document.createElement("li");
+          li.textContent = `#${index + 1} ${entry.username} - Score: ${entry.score}`;
+          list.appendChild(li);
+        });
+
+        if (userId) {
+          const userRes = await fetch(`/api/rank/${userId}`);
+          const userData = await userRes.json();
+          document.getElementById("userRank").textContent =
+            `Your Rank: #${userData.rank} | Highest Score: ${userData.score}`;
+        }
+      }
+
+      // Toggle top 5 / top 10
+      let showTop5 = false;
+      const btn = document.getElementById("top5Btn");
+      btn.addEventListener("click", () => {
+        showTop5 = !showTop5;
+        btn.textContent = showTop5 ? "Show Top 10" : "Show Top 5";
+        fetchLeaderboard(showTop5 ? 5 : 10);
+      });
+
+      fetchLeaderboard();
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
