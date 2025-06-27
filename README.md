@@ -37,12 +37,19 @@
 >Team Members and Roles:
 
 - Aysha Mukhtar
+
+-Created sign up and Login drop down forms to store score history
+
+-Added in the API so that the questions are generated, and there is an option to pick the category of questions
   
 -Helped create the Home page (index.html), Questions page (questions.html), results.html and leaderboard page
 
 -Added background with animaated moving image
 
 -Added the server and server steps to make sure everything runs smoothly
+
+-Deployed app using heroku
+
 
 
 
