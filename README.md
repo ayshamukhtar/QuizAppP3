@@ -15,34 +15,30 @@
 >How to run the server:
 ->Download .zip file to access the files
 
-- Step 1: make sure you have Node.js installed on your machine.
+- Step 1: Download the .zip file and extract the contents to a folder on your computer
 
-- Step 2: clone the repository in your terminal: git clone https://github.com/ayshamukhtar/QuizAppFinal.git
+- Step 2: Open terminal and cd path/to/QuizAppP3  (the path will be where you stored the folder on your computer)
 
-- Step 3: cd QuizAppFinal
+- Step 3: npm install
 
-- Step 4: npm install 
+- Step 4: Run the server: node server.js
 
-- Step 5: Run the server: node server.js
-
-- Step 6: On your brower go to http://localhost:3000
+- Step 5: On your brower go to http://localhost:3000
 
 
 >Team Members and Roles:
 
 - Aysha Mukhtar
   
--Helped create the Home page (index.html), Questions page (questions.html) and results.html
+-Helped create the Home page (index.html), Questions page (questions.html), results.html and leaderboard page
 
 -Added background with animaated moving image
 
 -Added the server and server steps to make sure everything runs smoothly
 
--Deployed add using Render
 
--Sign Up button 
 
--Loaded the questions
+
 
 - Brenna Solomon
  
