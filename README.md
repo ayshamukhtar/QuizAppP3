@@ -62,3 +62,5 @@
 - Enabled the light/dark mode system.
 - Assisted Aysha on layout and page designs for html pages.
 - Included a timer onto the questions page such that it moves to the next question if a question isn't answered before the timer runs out.
+-Assisted in designing the profile page so when a user logs in their score history is displayed.
+-Database configurations to ensure history was being saved and could be later viewed.
